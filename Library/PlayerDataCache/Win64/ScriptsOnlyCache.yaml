@@ -155,8 +155,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
-    - Class: 89
-      Script: {instanceID: 0}
     - Class: 91
       Script: {instanceID: 0}
     - Class: 95
@@ -1030,4 +1028,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/_Completed-Game/Scenes/MainMenu.unity
   - Assets/Scenes/_Completed-Game/Scenes/CollectObjectsModes.unity
-  playerPath: D:/ASEUnity/Projects/Roll A Ball Downloaded/AllBuilds/11/Collect-Objects.exe
+  playerPath: D:/ASEUnity/Projects/Roll A Ball Downloaded/AllBuilds/13/Collect-Objects.exe
