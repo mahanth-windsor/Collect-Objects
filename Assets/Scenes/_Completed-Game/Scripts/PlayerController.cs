@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody rb;
 	private string[] INSTRUCTIONS = { "Orange", "Green", "Purple", "Blue" };
 	private int count;
+	private float groundDimension = 9.4f;
+	private float groundScale = 2;
 
 	// At the start of the game..
 	void Start ()
@@ -72,43 +74,42 @@ public class PlayerController : MonoBehaviour {
 			other.gameObject.SetActive(false);
 
 			// Add one to the score variable 'count'
-			count = count + 1;
+			count++;
 
-			// Run the 'SetCountText()' function (see below)
-			SetCountText();
+			return transfromObjectPosition(other);
 
-			other.gameObject.transform.position = new Vector3(Random.Range(-8.8f, 8.8f), (float)0.5, Random.Range(-8.8f, 8.8f));
-			//Print the time of when the function is first called.
-			Debug.Log("Started Coroutine at timestamp : " + Time.time);
-
-			//yield on a new YieldInstruction that waits for 5 seconds.
-			yield return new WaitForSeconds(Mathf.CeilToInt(Random.Range(1.0f, 4.0f)));
-
-			//After we have waited 5 seconds print the time again.
-			Debug.Log("Finished Coroutine at timestamp : " + Time.time);
-
-			other.gameObject.SetActive(true);
-			
 		}
 
 		else
 		{
 			other.gameObject.SetActive(false);
+
 			count--;
-			SetCountText();
 
-			other.gameObject.transform.position = new Vector3(Random.Range(-8.8f, 8.8f), (float)0.5, Random.Range(-8.8f, 8.8f));
-			//Print the time of when the function is first called.
-			Debug.Log("Started Coroutine at timestamp : " + Time.time);
-
-			//yield on a new YieldInstruction that waits for 5 seconds.
-			yield return new WaitForSeconds(Mathf.CeilToInt(Random.Range(1.0f, 4.0f)));
-
-			//After we have waited 5 seconds print the time again.
-			Debug.Log("Finished Coroutine at timestamp : " + Time.time);
-
-			other.gameObject.SetActive(true);
+			return transfromObjectPosition(other);
 		}
+
+	}
+
+	IEnumerator transfromObjectPosition (Collider other)
+	{
+		// Run the 'SetCountText()' function (see below)
+		SetCountText();
+
+		float sideLength = groundDimension * groundScale;
+
+		other.gameObject.transform.position = 
+			new Vector3(Random.Range( -1 * sideLength, sideLength), (float)0.5 * groundScale, Random.Range(-1 * sideLength, sideLength));
+		//Print the time of when the function is first called.
+		Debug.Log("Started Coroutine at timestamp : " + Time.time);
+
+		//yield on a new YieldInstruction that waits for 5 seconds.
+		yield return new WaitForSeconds(Mathf.CeilToInt(Random.Range(1.0f, 4.0f)));
+
+		//After we have waited 5 seconds print the time again.
+		Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+
+		other.gameObject.SetActive(true);
 	}
 
 	void SetGameInstructions()
