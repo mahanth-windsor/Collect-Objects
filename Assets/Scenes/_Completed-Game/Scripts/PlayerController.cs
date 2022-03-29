@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 	
@@ -58,7 +59,23 @@ public class PlayerController : MonoBehaviour {
 		// multiplying it by 'speed' - our public player speed that appears in the inspector
 		rb.AddForce (movement * speed);
 
+		if (count < -5)
+		{
+
+			winText.text = "Game Over!!!";
+
+			Invoke("Restart", 2f);
+
+		}
+
 	}
+
+	void Restart()
+	{
+		SceneManager.LoadScene(0);
+	}
+
+
 
 	// When this game object intersects a collider with 'is trigger' checked, 
 	// store a reference to that collider in a variable named 'other'..
@@ -85,6 +102,8 @@ public class PlayerController : MonoBehaviour {
 			other.gameObject.SetActive(false);
 
 			count--;
+
+			
 
 			return transfromObjectPosition(other);
 		}
